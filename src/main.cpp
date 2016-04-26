@@ -2,7 +2,6 @@
 #include <random>
 #include <fstream>
 #include <string>
-//#include <thread>
 #include <chrono>
 
 #include "m1.h"
