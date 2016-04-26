@@ -4,6 +4,8 @@
 #include <string>
 #include <chrono>
 
+#include <signal.h>
+
 #include "m1.h"
 #include "m2.h"
 #include "m3.h"
@@ -15,7 +17,7 @@
 #include "m9.h"
 #include "definitions.h"
 
-#define POINT_NUMBER 200000
+#define POINT_NUMBER 100000
 
 #define MI_NUMBER 9
 
@@ -79,6 +81,7 @@ int main(){
 
         double s = sqrtS*sqrtS;
         long double sum = 0;
+        int points_cought = 0;
 
         double S1_start = 2;//m*m
         double S1_finish = (sqrtS-mz)*(sqrtS-mz);
@@ -102,15 +105,13 @@ int main(){
                 x = matrixEl(s,s1rand,s2rand,t1rand);
                 if (!std::isnan(x)){
                     sum += x;
-                }
-                else {
-                    --real_point_n;
+                    points_cought++;
                 }
             }
         }
 
         ofstream fout(outName,std::ios_base::app);
-        fout << sqrtS << ' ' << (sum* volume1)/(POINT_NUMBER*s*s) << '\n';
+        fout << sqrtS << ' ' << (sum* volume1 *points_cought)/(POINT_NUMBER*s*s) << '\n';
         fout.close();
 
         TimePoint time2 = chrono::system_clock::now();
