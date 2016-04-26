@@ -55,11 +55,11 @@ double matrixEl_terms1(double s, double s1, double s2, double t1){
 }
 
 double matrixEl_terms2(double s, double s1, double s2, double t1){
-    return matrixEl_terms(5, 9, s, s1, s2, t1);
+    return matrixEl_terms(5, MI_NUMBER, s, s1, s2, t1);
 }
 
 double matrixEl(double s, double s1, double s2, double t1){
-    return matrixEl_terms(0, 9, s, s1, s2, t1);
+    return matrixEl_terms(0, MI_NUMBER, s, s1, s2, t1);
 }
 
 
