@@ -12,6 +12,8 @@ HEADERS += definitions.h \
         m1.h m2.h m3.h m4.h m5.h m6.h m7.h m8.h m9.h
 INCLUDEPATH = ./include/
 
-OBJECTS_DIR = ../obj/
+OBJECTS_DIR = ../objThread/
 
-QMAKE_CXXFLAGS += -O3
+QMAKE_CXXFLAGS += -O3 -pthread
+
+LIBS += -pthread

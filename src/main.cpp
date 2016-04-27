@@ -24,7 +24,7 @@
 
 using namespace std;
 
-string outName = "output.dat";
+string outName = "outputThreads.dat";
 
 typedef uniform_real_distribution<double> rand_dist;
 
@@ -150,7 +150,7 @@ int main(){
         thread2.join();
 
         double sum = result1.first + result2.first;
-        int points_cought = result1.second + result2.second;
+        int points_cought = result1.second;
 
         ofstream fout(outName,std::ios_base::app);
         fout << sqrtS << ' ' << (sum* volume1*points_cought)/(POINT_NUMBER*s*s) << '\n';
