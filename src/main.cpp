@@ -4,8 +4,6 @@
 #include <string>
 #include <chrono>
 
-#include <signal.h>
-
 #include "m1.h"
 #include "m2.h"
 #include "m3.h"
@@ -53,11 +51,11 @@ double matrixEl_terms1(double s, double s1, double s2, double t1){
 }
 
 double matrixEl_terms2(double s, double s1, double s2, double t1){
-    return matrixEl_terms(5, 9, s, s1, s2, t1);
+    return matrixEl_terms(5, MI_NUMBER, s, s1, s2, t1);
 }
 
 double matrixEl(double s, double s1, double s2, double t1){
-    return matrixEl_terms(0, 9, s, s1, s2, t1);
+    return matrixEl_terms(0, MI_NUMBER, s, s1, s2, t1);
 }
 
 
@@ -72,7 +70,6 @@ int main(){
     mt19937 gen(rd());
     double x = 0;
     ofstream fout(outName);
-    int real_point_n = POINT_NUMBER;
     fout.close();
 
 
@@ -91,11 +88,11 @@ int main(){
 
         double T1_start = t1minus(s,S2_start);
         rand_dist disS1(S1_start,S1_finish);
-        rand_dist disS2(S2_start, S2_finish);
-        rand_dist disT1(T1_start,0);
+        rand_dist disS2(S2_start, S2_finish-10);
+        rand_dist disT1(T1_start+25,-25);
         long double volume1 = abs(S1_finish - S1_start) * abs(S2_finish - S2_start);
         volume1 *= abs(T1_start);
-        //ofstream tout("test.dat");
+        ofstream tout("negative.dat");
         for (int i = 0; i < POINT_NUMBER; i++){
             double s2rand = disS2(gen);
             double s1rand = disS1(gen);
@@ -106,6 +103,11 @@ int main(){
                 if (!std::isnan(x)){
                     sum += x;
                     points_cought++;
+                }
+                if (x < 0) {
+                    tout << x << " N:" << i <<"\n";
+                    tout.close();
+                    return 0;
                 }
             }
         }
